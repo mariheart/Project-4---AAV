@@ -3,6 +3,7 @@ let isOn = 0;
 function setup() {
   createCanvas(400, 400);
   mic = new p5.AudioIn();
+	mic.connect();
 	frameRate(10);
 }
 
@@ -16,8 +17,6 @@ function draw() {
 	let co2 = color(255, 100, 255);
 	
 	let inter = map(mouseY, height, 0, 0, 1); // Inter value for BG
-	let colBG = lerpColor(co1, co2, inter);
-  background(colBG);
 	mouseClicked();
   let vol = mic.getLevel();
   let inp = map(vol, 0, 1, 20, 5000);
@@ -29,17 +28,21 @@ function draw() {
   osc.amp(0.05);
   osc.start();
   console.log(vol);
-  let yVal = map(vol, 0, 1, 50, 350); // Grid yVal
-  let leftX = map (vol, 0, 1, 50, 100); // Grid left xVal
-  let rightX = map(vol, 0, 1, 325, 375); // Grid right xVal
+  let yVal = map(vol, 0, 1, 350, 50); // Grid yVal
+  let leftX = map (vol, 0, 1, 100, 50); // Grid left xVal
+  let rightX = map(vol, 0, 1, 300, 350); // Grid right xVal
 	let colGrid = lerpColor(c1, c2, inpter); // Grid colors
+	/*************************LET'S DRAW SOME SHAPES!****************************************/
+	let colBG = lerpColor(co1, co2, inpter);
+  background(colBG);
 	fill(colGrid);
 	noStroke();
   quad(100, 350, 300, 350, rightX, yVal, leftX, yVal);
   
+	let intEllipse = map(vol, 0, 1, 0, 19);
 	ellipseMode(CENTER);
-	ellipse(50, 20, 19, 19);
-	ellipse(350, 20, 19, 19);
+	ellipse(50, 20, 19, intEllipse);
+	ellipse(350, 20, 19, intEllipse);
 }
 
 function mouseClicked() {
