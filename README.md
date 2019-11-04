@@ -1,2 +1,4 @@
 # Project-4---AAV
-screamo.
+screamo instrument. yell to play, l to record loop, p to play.
+
+enjoy.
